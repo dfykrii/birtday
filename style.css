@@ -1,0 +1,377 @@
+/* GENERAL RESET */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100vh;
+}
+
+:root {
+  --tongue: #c12115;
+  --pupil: #fff;
+  --icing: #f2f2f2;
+  --stroke: #1a1a1a;
+}
+
+/* =============== BODY STYLING =============== */
+body {
+  --frosting: hsl(var(--frosting-hue, 0), 100%, 55%);
+  --lightness: 50;
+  --flame: 0;
+  --glow-hue: 40;
+  --glow-saturation: 50;
+  --glow-lightness: 35;
+  --glow-alpha: 0.4;
+  --transparency-alpha: 0;
+  --glow: hsla(
+    var(--glow-hue),
+    calc(var(--glow-saturation) * 1%),
+    calc(var(--glow-lightness) * 1%),
+    var(--glow-alpha)
+  );
+  --transparent: hsla(0, 0%, 0%, var(--transparency-alpha));
+  display: flex;
+  overflow: hidden;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: hsl(180, 30%, calc(var(--lightness, 50) * 1%));
+}
+
+/* =============== SPACING =============== */
+.whitespace {
+  width: 7px;
+}
+
+/* =============== BIRTHDAY BUTTON =============== */
+.birthday-button {
+  position: relative;
+  transform: scale(0.6);
+  cursor: pointer;
+}
+
+.birthday-button__text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-family: sans-serif;
+  font-weight: bold;
+}
+
+.birthday-button__text .char {
+  display: inline-block;
+  color: hsl(
+    var(--hue, 0),
+    calc(var(--char-sat, 0) * 1%),
+    calc(var(--char-light, 0) * 1%)
+  );
+}
+
+.birthday-button:before {
+  content: "";
+  position: absolute;
+  height: 240px;
+  width: 240px;
+  background: radial-gradient(var(--glow), var(--transparent) 30%),
+    radial-gradient(var(--glow), var(--transparent) 50%);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -70%) scale(calc(var(--flame) * 3));
+  z-index: 2;
+  filter: blur(15px);
+  opacity: var(--flame);
+}
+
+.birthday-button:after {
+  content: "";
+  height: 30px;
+  width: 400px;
+  filter: blur(15px);
+  position: absolute;
+  background: radial-gradient(var(--glow), var(--transparent) 20%),
+    radial-gradient(var(--glow), var(--transparent));
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(calc(var(--flame) * 1));
+  opacity: var(--flame);
+}
+
+.birthday-button__button {
+  width: 240px;
+  height: 100px;
+  position: relative;
+  border: 0;
+  background: var(--icing);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.birthday-button__button:hover {
+  background: #eaeaea;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* =============== CAKE =============== */
+.birthday-button__cake {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 289.5px;
+  display: none;
+}
+
+.cake__eye-body,
+.cake__mouth-opening {
+  fill: var(--stroke);
+  stroke: var(--stroke);
+}
+
+.cake__eye-pupil {
+  fill: var(--pupil);
+}
+
+.cake__tongue {
+  fill: var(--tongue);
+}
+
+.cake__sprinkle {
+  --sprinkle: hsl(var(--sprinkle-hue, 0), 100%, 75%);
+  fill: var(--sprinkle);
+}
+
+.cake__frosting--start,
+.cake__frosting--duplicate {
+  fill: var(--frosting);
+}
+
+/* =============== CANDLE =============== */
+.candle__flame {
+  opacity: var(--flame, 0);
+  animation: flicker 0.3s infinite;
+}
+
+.candle__flame-outer {
+  fill: #ff711f;
+}
+
+.candle__flame-inner {
+  fill: #edca1d;
+}
+
+.cake__candle:nth-of-type(1),
+.cake__candle:nth-of-type(2),
+.cake__candle:nth-of-type(3) {
+  --flame: 0;
+}
+
+/* =============== FACE =============== */
+.face__stroke {
+  stroke: var(--stroke);
+}
+
+/* =============== DARK MODE TOGGLE =============== */
+label {
+  height: 44px;
+  width: 44px;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+label > svg {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+label path {
+  fill: #476b6b;
+}
+
+label svg:nth-of-type(1) {
+  display: none;
+}
+
+[type="checkbox"] {
+  height: 0;
+  width: 0;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+:checked ~ label svg:nth-of-type(1) {
+  display: block;
+}
+
+:checked ~ label svg:nth-of-type(2) {
+  display: none;
+}
+/* .birthday-button:before,
+.birthday-button:after {
+  pointer-events: none;
+  overflow: hidden;
+  max-width: 100%;
+  max-height: 100%;
+} */
+
+.birthday-button-wrapper {
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  align-items: center; /* ⬇️ Ini bikin isi nempel di bawah */
+  justify-content: center; /* Tengahin secara horizontal */
+}
+
+/* =============== MODAL (SURAT UCAPAN) =============== */
+
+/* =============== MODAL WRAPPER =============== */
+#letter {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 152, 179, 0.6);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  z-index: 999;
+  height: 100dvh;
+  width: 100vw;
+}
+
+#letter.show {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition-delay: 2.5s;
+}
+
+/* =============== MODAL BOX =============== */
+.modal__content {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3), 0 0 40px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  padding: 1.75rem 1.5rem;
+  border-radius: 20px;
+  width: 90vw;
+  max-width: 520px;
+  overflow-y: auto;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transform: translateY(100px) scale(0.95);
+  opacity: 0;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+  transition-delay: 2s;
+}
+
+/* Saat modal dibuka */
+#letter.show .modal__content {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  transition-delay: 4s;
+}
+
+.modal__content h2 {
+  font-size: clamp(1.6rem, 5vw, 2.1rem);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 4.2s, transform 0.8s ease 4.2s;
+}
+
+.modal__content p {
+  font-size: clamp(0.98rem, 4vw, 1.08rem);
+  line-height: 1.65;
+  color: #eaeaea;
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 4px;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 4.4s, transform 0.8s ease 4.4s;
+}
+
+/* Saat modal aktif */
+#letter.show .modal__content h2,
+#letter.show .modal__content p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Scrollbar (khusus p) */
+.modal__content p::-webkit-scrollbar {
+  width: 6px;
+}
+.modal__content p::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+}
+
+body.modal-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
+
+/* =============== ANIMATIONS =============== */
+@keyframes slideFadeUp {
+  from {
+    transform: translateY(150px) scale(0.95); /* ← kasih satuan di translateY */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.85;
+  }
+}
