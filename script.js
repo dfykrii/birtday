@@ -1,4 +1,3 @@
-gsap.registerPlugin(MorphSVGPlugin);
 const {
   gsap,
   gsap: { to, timeline, set, delayedCall },
